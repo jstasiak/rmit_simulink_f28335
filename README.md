@@ -19,12 +19,12 @@ Steps to create Simulink model which can be used to generate DSP program are sim
 	* _Build_ - if you just want to generate and compile code, or
 	* _Build_and_execute_ - if you want to generate code, compile it and then automatically run on the DSP
 
-**You can find preconfigured model file in `models/empty.mdl`.**
+**You can find preconfigured model file in [models/empty.mdl](models/empty.mdl).**
 
 Now it should be possible to execute _Tools/Code Generation/Build Model_ action (_Ctrl+B_) (program doesn't do anything useful at this point, though).
 
 Examples
 --------
 
-* `models/cdmotor_controller.mdl` - rotates DC motor using hardcoded angular speed value
+* [models/dcmotor_controller.mdl](models/dcmotor_controller.mdl) - rotates DC motor using hardcoded angular speed value
 	* **TODO: add information about motor model, PWM and interrupts used**
