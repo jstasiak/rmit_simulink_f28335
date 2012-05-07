@@ -23,6 +23,20 @@ Steps to create Simulink model which can be used to generate DSP program are sim
 
 Now it should be possible to execute _Tools/Code Generation/Build Model_ action (_Ctrl+B_) (program doesn't do anything useful at this point, though).
 
+Interrupt service routines
+--------------------------
+
+Our program is interrupt-based - pieces of code are execute whenever interrupt occures. For that we need to place _Embedded Coder/C280x/C28x3x Hardware Interrupt_ and _Simulink/Function-Call Subsystem_ blocks in the model. Then we connect interrupt output to function-call function() trigger input and set interrupt block configuration (only one interrupt for now):
+
+* CPU interrupt numbers: _[3]_
+* PIE interrupt numbers: _[1]_
+* Simulink task priorities: _[30]_
+* Preemption flags: _[0]_
+
+This configuration triggers function execution whenever _EPWM1_ interrupt occures.
+
+**Important: You have to have _ePWM1_ block in the model and you need it to have interrupts enabled (_Block Parameters/Event Trigger/Enable ePWM interrupt_).**
+
 Examples
 --------
 
