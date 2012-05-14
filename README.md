@@ -26,19 +26,26 @@ Now it should be possible to execute _Tools/Code Generation/Build Model_ action 
 Interrupt service routines
 --------------------------
 
-Our program is interrupt-based - pieces of code are execute whenever interrupt occures. For that we need to place _Embedded Coder/C280x/C28x3x Hardware Interrupt_ and _Simulink/Function-Call Subsystem_ blocks in the model. Then we connect interrupt output to function-call function() trigger input and set interrupt block configuration (only one interrupt for now):
+Our program is interrupt-based - pieces of code are execute whenever interrupt occures. For that we need to place _Embedded Coder/C280x/C28x3x Hardware Interrupt_ and _Simulink/Function-Call Subsystem_ blocks in the model. Then we connect interrupt output to function-call function() trigger input and set interrupt block configuration.
 
-* CPU interrupt numbers: _[3]_
-* PIE interrupt numbers: _[1]_
-* Simulink task priorities: _[30]_
-* Preemption flags: _[0]_
+**There can be only 1 interrupt block in the model. If you want to use more than one interrupt, you have to configure needed interrupts in this interrupt block and then demux it's output.**
+
+Interrupt list for F28335 eZdsp can be found in section _Table 6-4. PIE MUXed Peripheral Interrupt Vector Table_ in the _TMS320x2833x, 2823x System Control and Interrupts_ document.
+
+Let's configure EPWM1_INT interrupt service routine. We need to:
+
+* place EPWM block in the model
+* set Module to _ePWM1_ and check _Enable ePWM Interrupt_ in EPWM's block properties
+* set following values in interrupt's block properties:
+	* CPU interrupt numbers: _[3]_ (EPWM Interrupts group)
+	* PIE interrupt numbers: _[1]_ (EPWM1 interrupt)
+	* Simulink task priorities: _[30]_
+	* Preemption flags: _[0]_
 
 This configuration triggers function execution whenever _EPWM1_ interrupt occures.
-
-**Important: You have to have _ePWM1_ block in the model and you need it to have interrupts enabled (_Block Parameters/Event Trigger/Enable ePWM interrupt_).**
 
 Examples
 --------
 
 * [models/dcmotor_controller.mdl](models/dcmotor_controller.mdl) - rotates DC motor using hardcoded angular speed value
-	* **TODO: add information about motor model, PWM and interrupts used**
+	* **TODO: add information about motor model**
