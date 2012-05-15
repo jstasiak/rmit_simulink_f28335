@@ -42,7 +42,7 @@ Multiple interrupts
 Interrupt list
 --------------
 
-Interrupt list for F28335 eZdsp can be found in section _Table 6-4. PIE MUXed Peripheral Interrupt Vector Table_ in the _TMS320x2833x, 2823x System Control and Interrupts_ document. Interrupt INTX.Y correspondes to _CPU Interrupt Number: X_ and _PIE Interrupt Number: Y_.
+Interrupt list for F28335 eZdsp can be found in section _Table 6-4. PIE MUXed Peripheral Interrupt Vector Table_ in the _TMS320x2833x, 2823x System Control and Interrupts_ document. Interrupt INTX.Y corresponds to _CPU Interrupt Number: X_ and _PIE Interrupt Number: Y_.
 
 Note
 -------
@@ -54,6 +54,7 @@ Some interrupts
 
 * _EPWM1_INT_: INT3.1
 * _EQEP1_INT_: INT5.1
+* _EQEP2_INT_: INT5.2
 
 Example
 -------
@@ -70,9 +71,28 @@ Let's configure EPWM1_INT interrupt service routine. We need to:
 
 This configuration triggers function execution whenever _EPWM1_ interrupt occures.
 
+Laboratory hardware
+===================
+
+eQEP configuration
+------------------
+
+In RMIT laboratory we need following eQEP configuration (in eQEP block configuration parameters):
+
+**TODO: check that section**
+
+* General
+	* Module: eQEP2
+	* Position counter mode: Quadrature-count (better counting precision)
+* Position counter
+	* Check _Output position counter_
+	* Set _Maximum position counter value_ to _2048_
+	* Check _Enable set to init value on index event_
+		* _Initialization value_: _0_
+	* Check _Enable software initialization_ (?) 
 
 Examples
---------
+========
 
 * [models/dcmotor_controller.mdl](models/dcmotor_controller.mdl) - rotates DC motor using hardcoded angular speed value
 	* **TODO: add information about motor model**
