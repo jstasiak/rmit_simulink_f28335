@@ -7,7 +7,7 @@ Document explaining process of programming TI F28335 eZdsp using Simulink models
 
 
 Basic configuration
--------------------
+===================
 
 Steps to create Simulink model which can be used to generate DSP program are simple:
 
@@ -24,27 +24,39 @@ Steps to create Simulink model which can be used to generate DSP program are sim
 Now it should be possible to execute _Tools/Code Generation/Build Model_ action (_Ctrl+B_) (program doesn't do anything useful at this point, though).
 
 Interrupt service routines
---------------------------
+==========================
 
-### Basics
+Basics
+------
 
 Our program is interrupt-based - pieces of code are execute whenever interrupt occures. For that we need to place _Embedded Coder/C280x/C28x3x Hardware Interrupt_ and _Simulink/Function-Call Subsystem_ blocks in the model. Then we connect interrupt output to function-call function() trigger input and set interrupt block configuration.
 
 In _Interrupt_ block the most important parameters are _CPU Interrupt Numbers_ and _PIE Interrupt Numbers_, they translate to final interrupt identifier.
 
-### Multiple interrupts
+Multiple interrupts
+-------------------
 
 **There can be only 1 interrupt block in the model.** If you want to use more than one interrupt, you have to configure needed interrupts (for example: _CPU Interrupt Numbers: [3 3]_, _PIE Interrupt Numbers: [1 2]_) in this interrupt block and then demux it's output using _Demux_ block.
 
-### Interrupt list
+
+Interrupt list
+--------------
 
 Interrupt list for F28335 eZdsp can be found in section _Table 6-4. PIE MUXed Peripheral Interrupt Vector Table_ in the _TMS320x2833x, 2823x System Control and Interrupts_ document. Interrupt INTX.Y correspondes to _CPU Interrupt Number: X_ and _PIE Interrupt Number: Y_.
 
-### Note
+Note
+-------
 
 It is not enough just to provide ISR. Interrupt has to be also enabled/triggered in order to execute appropriate ISR. For instance: to enable EPWM1 interrupt, you have to place appropriate EPWM block in the model, set module to EPWM1 and enable interrupts in it's configuration properties.
 
-### Example
+Some interrupts
+---------------
+
+* _EPWM1_INT_: INT3.1
+* _EQEP1_INT_: INT5.1
+
+Example
+-------
 
 Let's configure EPWM1_INT interrupt service routine. We need to:
 
@@ -57,6 +69,7 @@ Let's configure EPWM1_INT interrupt service routine. We need to:
 	* Preemption flags: _[0]_
 
 This configuration triggers function execution whenever _EPWM1_ interrupt occures.
+
 
 Examples
 --------
