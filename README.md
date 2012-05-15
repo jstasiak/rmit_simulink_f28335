@@ -3,8 +3,17 @@ Intro
 
 Document explaining process of programming TI F28335 eZdsp using Simulink models
 
+Requirements
+============
 
+To generate, build and run code you need the following:
 
+* Matlab R2011b with Simulink Coder and Embedded Coder add-ons
+* Texas Instruments Code Composer Studio 3.x (**Currently we are unable to integrate CCS 4.x with Simulink Coder**).
+
+Also, as far as hardware is concerned, you need:
+
+* TI F28335 eZdsp on board connected to PC
 
 Basic configuration
 ===================
