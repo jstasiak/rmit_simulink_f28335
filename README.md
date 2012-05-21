@@ -23,7 +23,7 @@ Steps to create Simulink model which can be used to generate DSP program are sim
 1. Create new Simulink model
 1. Drop new _Simulink Coder/Target Preferences_ block on the model. In _Initializa Configuration Parameters_ select:
 	* IDE/Tool Chain: _Texas Instruments Code Composer Studio_
-	* Board: _SD F28355 eZdsp_Do you want to update the model's Configuration Parameters to correspond to your selections: _Yes_
+	* Board: _SD F28355 eZdsp_Do you want to update the model's Configuration Parameters to correspond to your selections_: _Yes_
 1. When in your model window, open _Tools/Code Generation/Options..._ dialog. In _Code Generation/IDE Link_ select appropriate _Build action_:
 	* _Build_ - if you just want to generate and compile code, or
 	* _Build_and_execute_ - if you want to generate code, compile it and then automatically run on the DSP
@@ -51,7 +51,7 @@ Multiple interrupts
 Interrupt list
 --------------
 
-Interrupt list for F28335 eZdsp can be found in section _Table 6-4. PIE MUXed Peripheral Interrupt Vector Table_ in the _TMS320x2833x, 2823x System Control and Interrupts_ document. Interrupt INTX.Y corresponds to _CPU Interrupt Number: X_ and _PIE Interrupt Number: Y_.
+Interrupt list for F28335 eZdsp can be found in _Table 6-4._ in [1]. Interrupt INTX.Y corresponds to _CPU Interrupt Number: X_ and _PIE Interrupt Number: Y_.
 
 Note
 -------
@@ -105,3 +105,8 @@ Examples
 
 * [models/dcmotor_controller.mdl](models/dcmotor_controller.mdl) - rotates DC motor using hardcoded angular speed value
 	* **TODO: add information about motor model**
+
+References
+==========
+
+1. _TMS320x2833x, 2823x System Control and Interrupts_
